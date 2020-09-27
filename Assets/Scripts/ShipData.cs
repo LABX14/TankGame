@@ -2,20 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Mover : MonoBehaviour
+public class ShipData : MonoBehaviour
 {
-    public float tempSpeed;
-    private Transform tf;
+
+    public float speed;
+    public float rotateSpeed;
+    public ShipMover mover;
+    public float damageDone;
+    public float shootDelay;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        mover = GetComponent<ShipMover>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.position = transform.position + (transform.forward * tempSpeed * Time.deltaTime);
+        
     }
 }
