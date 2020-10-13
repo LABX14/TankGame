@@ -6,7 +6,7 @@ public class HumanController : MonoBehaviour
 {
     public ShipData data;
 
-    public enum ControlType { WASD, ArrowKeys};
+    public enum ControlType { WASD, ArrowKeys, Controller1, Controller2 };
     public ControlType controlType;
 
 
@@ -25,12 +25,12 @@ public class HumanController : MonoBehaviour
             if (Input.GetKey(KeyCode.W))
             {
                 // Move forward (+)
-                directionToMove = transform.forward;
+                directionToMove = data.transform.forward;
             }
             if (Input.GetKey(KeyCode.S))
             {
                 // Move backward (-)
-                directionToMove = -transform.forward;
+                directionToMove = -data.transform.forward;
             }
             if (Input.GetKey(KeyCode.A))
             {
@@ -48,7 +48,52 @@ public class HumanController : MonoBehaviour
 
         if (controlType== ControlType.ArrowKeys)
         {
+            if (Input.GetKey(KeyCode.UpArrow))
+            {
+                // Move forward (+)
+                directionToMove = data.transform.forward;
+            }
+            if (Input.GetKey(KeyCode.DownArrow))
+            {
+                // Move backward (-)
+                directionToMove = -data.transform.forward;
+            }
+            if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                // Rotate CountClockwise (-)
+                data.mover.Rotate(false);
+            }
+            if (Input.GetKey(KeyCode.RightArrow))
+            {
+                // Rotate Clockwise (+)
+                data.mover.Rotate(true);
+            }
+            data.mover.Move(directionToMove);
+        }
 
+        if (controlType == ControlType.Controller1)
+        {
+            if (Input.GetAxis("Vertical1") > 0.5)
+            {
+                // Move forward (+)
+                directionToMove = data.transform.forward;
+            }
+            if (Input.GetAxis("Vertical1") > -0.5)
+            {
+                // Move backward (-)
+                directionToMove = -data.transform.forward;
+            }
+            if (Input.GetAxis("Horizontal1") < -0.5)
+            {
+                // Rotate CountClockwise (-)
+                data.mover.Rotate(false);
+            }
+            if (Input.GetAxis("Horizontal1") > 0.5)
+            {
+                // Rotate Clockwise (+)
+                data.mover.Rotate(true);
+            }
+            data.mover.Move(directionToMove);
         }
     }
 }

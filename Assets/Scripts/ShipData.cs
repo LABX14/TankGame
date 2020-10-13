@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class ShipData : MonoBehaviour
 {
-
     public float speed;
     public float rotateSpeed;
-    public ShipMover mover;
+    public Mover mover;
     public float damageDone;
     public float shootDelay;
+    
 
     // Start is called before the first frame update
     void Start()
