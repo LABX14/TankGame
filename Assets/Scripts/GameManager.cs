@@ -6,6 +6,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public int score;
+    public GameObject player;
+    public GameObject playerPrefab;
 
     private void Awake()
     {
