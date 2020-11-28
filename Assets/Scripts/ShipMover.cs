@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class ShipMover : Mover
 {
-    private CharacterController cc;
-    private ShipData data;
+    private CharacterController cc; // This is a variable that calls for the Character Controller from the Human Controller Script 
+    private ShipData data; // This grabs data from the Ship Data script
 
     // Start is called before the first frame update
     void Start ()
@@ -14,11 +14,13 @@ public class ShipMover : Mover
         data = GetComponent<ShipData>();
     }
 
+    // This determines the direction and speed the object moves
     public override void Move ( Vector3 direction)
     {
         cc.SimpleMove( direction * data.speed);
     }
 
+    // This determines the ships rotation
     public override void Rotate ( bool isClockwise)
     {
         if (isClockwise)

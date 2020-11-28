@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Timer : MonoBehaviour
 {
-    public float timeBetweenBooms;
-    public float countdown;
-    public float timeForNextBoom;
-    public float timeOfLastBoom;
+    public float timeBetweenBooms; // This tracks the time between each shot
+    public float countdown; // This adds a countdown after a shot 
+    public float timeForNextBoom; // This tells the player when they can shoot again
+    public float timeOfLastBoom;  // This tracks when the player last shot
 
     // Start is called before the first frame update
     void Start()
@@ -27,7 +27,7 @@ public class Timer : MonoBehaviour
     {
         if (Time.time >= timeForNextBoom + timeBetweenBooms)
         {
-            Debug.Log(" Boom ");
+            // Debug.Log(" Boom ");
             // Set the time we last boomed
             timeOfLastBoom = Time.time;
         }

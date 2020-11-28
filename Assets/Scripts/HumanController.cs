@@ -5,28 +5,44 @@ using System;
 
 public class HumanController : MonoBehaviour
 {
-    public ShipData data;
+    public ShipData data;           // This adds data from the ShipData script
 
-    public enum ControlType { WASD, ArrowKeys, Controller1, Controller2 };
-    public ControlType controlType;
+    public enum ControlType { WASD, ArrowKeys, Controller1, Controller2 }; // This gives a list of different controls to apply to the ships
+    public ControlType controlType; 
 
-    public GameObject bulletPrefab;
-    private Transform change;
-    public float bulletSpeed = 6f;
-    public Transform bulletPosition;
+    public GameObject bulletPrefab;         // Asks for a bullet prefab in the inspector
+    private Transform change;               // Changes that objects transform
+    public float bulletSpeed = 6f;          // This determine the player's speed
+    public Transform bulletPosition;        // This gets the bulletPosition for the player
+    private float shootCoolDown;            //conducts cooldown from ship data fire rate
+    private bool isReadyToShoot = true;     //tracks if the ship is ready to shoot
 
     // Start is called before the first frame update
     void Start()
     {
         GameManager.instance.player = this.gameObject;
         change = gameObject.GetComponent<Transform>();
-
-         
+        shootCoolDown = data.fireRate;         
     }
 
     // Update is called once per frame
     void Update()
     {
+        //Handle Shooting timer
+        if (!isReadyToShoot) //if not ready to shoot, deduct from cooldown
+        {
+            //Cound down each second
+            shootCoolDown -= Time.deltaTime;
+
+            //If timer reaches 0, set isReadyToShoot and reset timer
+            if (shootCoolDown <= 0)
+            {
+                Debug.Log("You can shoot!");
+                isReadyToShoot = true;
+                shootCoolDown = data.fireRate;
+            }
+        }
+        
         // This will allow the player use WASD to move the ship. 
         Vector3 directionToMove = Vector3.zero;
         if (controlType == ControlType.WASD)
@@ -117,10 +133,20 @@ public class HumanController : MonoBehaviour
     // This will spawn the bullet and have it shoot from the ship
     public void Shoot()
     {
-        Debug.Log("pew pew");
-        GameObject bullet = Instantiate(bulletPrefab, bulletPosition.position, bulletPosition.rotation);
-        bullet.GetComponent<Bullet>().bulletSpeed = bulletSpeed;
-        Destroy(bullet, 2);
+        //If ready to shoot, shoot bullet and flag timer
+        if (isReadyToShoot)
+        {
+            //Shoot bullet
+            GameObject bullet = Instantiate(bulletPrefab, bulletPosition.position, bulletPosition.rotation);
+            bullet.GetComponent<Bullet>().bulletSpeed = bulletSpeed;
+            bullet.GetComponent<Bullet>().myShooter = this.gameObject;
+            Destroy(bullet, 2);
+
+            //Reset isReadyToShoot until cooldown timer is complete
+            isReadyToShoot = false;
+        }
+
+        //else not ready to shoot, do nothing        
         
     }
 }

@@ -369,6 +369,7 @@ MonoBehaviour:
   mover: {fileID: 0}
   damageDone: 0
   shootDelay: 0
+  fireRate: 2
 --- !u!114 &666766401
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -383,9 +384,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 666766399}
   controlType: 0
-  bulletPrefab: {fileID: 5023262062131301515, guid: 385db912d8656c24ab3cae43bd1ad924,
+  bulletPrefab: {fileID: 1259865673663102, guid: 8b227e0429c621940acb9e2e8d18d12f,
     type: 3}
-  bulletSpeed: 6
+  bulletSpeed: 50
   bulletPosition: {fileID: 8734851720691132279}
 --- !u!1 &1692945755674982
 GameObject:
