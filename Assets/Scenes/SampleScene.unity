@@ -267,6 +267,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1259865673663102, guid: a9d470234de7d9f4ba9ef935752f1a0c,
         type: 3}
+    - target: {fileID: 1658228972, guid: dae7a3955bbf76e409d09988296acacb, type: 3}
+      propertyPath: speed
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 1570034556958308, guid: dae7a3955bbf76e409d09988296acacb, type: 3}
       propertyPath: m_Name
       value: EnemyShip
@@ -713,8 +717,8 @@ MonoBehaviour:
   - {fileID: 210273900}
   - {fileID: 1776251204}
   currentWaypointIndex: 0
-  closeEnoughForWaypoints: 2
-  patrolType: 2
+  closeEnoughForWaypoints: 3
+  patrolType: 3
   isPatrolling: 1
   isPatrolForward: 1
 --- !u!4 &2077511949
@@ -834,6 +838,10 @@ PrefabInstance:
     - target: {fileID: 666766399, guid: f805c7b2f982faf43833878e4f22ae2a, type: 3}
       propertyPath: fireRate
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 666766399, guid: f805c7b2f982faf43833878e4f22ae2a, type: 3}
+      propertyPath: speed
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 1510364872509504, guid: f805c7b2f982faf43833878e4f22ae2a, type: 3}
       propertyPath: m_Name
