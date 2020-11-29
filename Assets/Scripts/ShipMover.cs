@@ -32,4 +32,33 @@ public class ShipMover : Mover
             transform.Rotate(new Vector3(0, -data.rotateSpeed * Time.deltaTime, 0));
         }
     }
+
+    public override void MoveTo(Transform targetTransform)
+    {
+        // Rotate twoards the transform 
+        RotateTowards(targetTransform);
+
+        // Move forwards
+        cc.SimpleMove(transform.forward * data.speed);
+    }
+
+    public void RotateTowards(Transform targetTransform)
+    {
+
+        Vector3 targetPosition = targetTransform.position;
+        targetPosition.y = transform.position.y;
+
+
+        // Rotate Towards that object 
+        // Find the vector from us to our target 
+        Vector3 targetVector = targetTransform.position - transform.position;
+        // Find the rotation to look down that vector 
+        Quaternion targetRotation = Quaternion.LookRotation(targetVector);
+        // Find a rotation that PARTWAY closer to that rotation than we are right now
+        Quaternion newRotation = Quaternion.RotateTowards(transform.rotation, targetRotation, data.rotateSpeed);
+        // Change to that new rotation
+        transform.rotation = newRotation;
+    }
+
+
 }

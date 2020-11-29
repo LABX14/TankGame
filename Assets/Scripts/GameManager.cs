@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public GameObject playerPrefab; // This grabs the player's prefab
 
     public List<ShipData> enemyShips; // This is a enemy ship variable that will be applied to a list
+    public List<Controller> players;
 
     private void Awake()
     {

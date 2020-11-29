@@ -21,7 +21,7 @@ public class Mover : MonoBehaviour
     }
 
     // This determines the ships rotation
-    public virtual void Rotate (bool isClockwise)
+    public virtual void Rotate(bool isClockwise)
     {
         if (isClockwise)
         {
@@ -32,4 +32,6 @@ public class Mover : MonoBehaviour
             transform.Rotate(new Vector3(0, -data.rotateSpeed * Time.deltaTime, 0));
         }
     }
+
+    public virtual void MoveTo(Transform targetTransform) { }
 }

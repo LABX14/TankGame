@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class HumanController : MonoBehaviour
+public class HumanController : Controller
 {
     public ShipData data;           // This adds data from the ShipData script
 
@@ -26,7 +26,7 @@ public class HumanController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
         //Handle Shooting timer
         if (!isReadyToShoot) //if not ready to shoot, deduct from cooldown
