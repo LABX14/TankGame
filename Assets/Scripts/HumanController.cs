@@ -5,7 +5,7 @@ using System;
 
 public class HumanController : Controller
 {
-    public ShipData data;           // This adds data from the ShipData script
+    
 
     public enum ControlType { WASD, ArrowKeys, Controller1, Controller2 }; // This gives a list of different controls to apply to the ships
     public ControlType controlType; 
@@ -21,8 +21,15 @@ public class HumanController : Controller
     void Start()
     {
         GameManager.instance.player = this.gameObject;
-        change = gameObject.GetComponent<Transform>();
-        shootCoolDown = data.fireRate;         
+        change = gameObject.GetComponent<Transform>(); // the value of change is equal to Tranform of the gameobject
+        shootCoolDown = data.fireRate; // The cooldown for the shot is equal to the fire rate that is from given the ShipData script.     
+        GameManager.instance.players.Add(this); // Add to list of players
+    }
+
+    public void OnDestroy()
+    {
+        // Remove from list of players
+        GameManager.instance.players.Remove(this);
     }
 
     // Update is called once per frame
@@ -131,7 +138,7 @@ public class HumanController : Controller
     }
 
     // This will spawn the bullet and have it shoot from the ship
-    public void Shoot()
+    public virtual void Shoot()
     {
         //If ready to shoot, shoot bullet and flag timer
         if (isReadyToShoot)

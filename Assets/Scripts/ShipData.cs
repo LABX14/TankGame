@@ -17,6 +17,12 @@ public class ShipData : MonoBehaviour
     public int curHealth = 100; //This determines the current health that will subtract when the ship takes damage
 
     public GameObject lastShotBy;
+    // internal object shooter;
+
+    public GameObject bulletPrefab;         // Asks for a bullet prefab in the inspector
+    public Transform bulletPosition;        // This gets the bulletPosition for the player
+    public float bulletSpeed = 6f;          // This determine the player's speed
+    private bool isReadyToShoot = true;     //tracks if the ship is ready to shoot
 
     // Start is called before the first frame update
     void Start()
@@ -57,5 +63,24 @@ public class ShipData : MonoBehaviour
     {
         GameManager.instance.enemyShips.Remove(this);
         GameManager.instance.score += 1;
+    }
+
+    public virtual void Shoot()
+    {
+        //If ready to shoot, shoot bullet and flag timer
+        if (isReadyToShoot)
+        {
+            //Shoot bullet
+            GameObject bullet = Instantiate(bulletPrefab, bulletPosition.position, bulletPosition.rotation);
+            bullet.GetComponent<Bullet>().bulletSpeed = bulletSpeed;
+            bullet.GetComponent<Bullet>().myShooter = this.gameObject;
+            Destroy(bullet, 2);
+
+            //Reset isReadyToShoot until cooldown timer is complete
+            isReadyToShoot = false;
+        }
+
+        //else not ready to shoot, do nothing        
+
     }
 }

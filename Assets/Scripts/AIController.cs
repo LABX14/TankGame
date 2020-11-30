@@ -15,22 +15,97 @@ public class AIController : Controller
     public bool isPatrolling = true; // Set isPatrolling to true. isPatrolling means that the AI is currently patrolling
     public bool isPatrolForward = true; // Set isPatrolForward to true. isPatrolForward means that the AI is patrolling and moving forward
 
-    public void Update()
+    public enum AIStates { Idle, Spin, AttackPlayer } // These are the different states that AI can be in.
+    public AIStates currentState = AIStates.Idle; // AI variable for its default state
+
+    public GameObject target;
+
+    public virtual void Update()
     {
-        if (isPatrolling) // If isPatrolling is running
-        {
-            DoPatrol(); // Then run DoPatrol 
-        }
+
+
+        //if (isPatrolling) // If isPatrolling is running
+        //{
+            //DoPatrol(); // Then run DoPatrol 
+        //}
     }
+
+    
+    public void DoAttackPlayer() {
+        // Set player as target
+        target = GameManager.instance.players[0].data.gameObject;
+        // Attack Target
+        DoAttackTarget();
+    }
+
+    public void DoTargetPlayer()
+    {
+        // Set player as target
+        target = GameManager.instance.players[0].data.gameObject;
+    }
+
+    public void DoLeadAttackTarget()
+    {
+        // If our target is not null
+        // Move to 1 unit IN FRONT of target 
+        // Shoot
+    }
+
+    public void DoAttackTarget()
+    {
+        // If our target is not null
+        if ( target != null)
+        {
+            // Move to target
+            data.mover.MoveTo(target.transform);
+
+            // Shoot (Shoot is limited in fire rate)
+            data.Shoot();
+        }
+
+
+    }
+
+    public void DoIdle() {
+        // Do Nothing!
+    }
+
+    public void Spin()
+    {
+        // Just rotate
+        data.mover.Rotate(true);
+    }
+
+    public void TurnToFindPlayer()
+    {
+        // TODO: Set target as nearest player
+        // TODO: Turn towards player 
+
+    }
+
 
     public void DoShoot()
     {
-
+        // Just shoot
+        data.Shoot();
     }
 
     public void DoFindNearestHealthPack()
     {
+        // Set target to nearest health pack
+    }
 
+
+    public bool CanSee( GameObject target )
+    {
+        // TODO: Line of Sight and Field of View Checks 
+        return false;
+    }
+
+    public bool CanHear (GameObject target)
+    {
+        // TODO: Distance check and soundmaker level check 
+        return false;
     }
 
 
