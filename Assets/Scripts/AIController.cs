@@ -18,7 +18,11 @@ public class AIController : Controller
     public enum AIStates { Idle, Spin, AttackPlayer } // These are the different states that AI can be in.
     public AIStates currentState = AIStates.Idle; // AI variable for its default state
 
-    public GameObject target;
+    public float fieldOfView = 60.0f; // How much the player can see
+    public float viewDistance = 10.0f; // How far the player can see
+    public float hearingSensitivity = 1.0f; // How well the AI hear 
+    public GameObject target; // This will track the targeting system
+
 
     public virtual void Update()
     {
@@ -33,7 +37,7 @@ public class AIController : Controller
     
     public void DoAttackPlayer() {
         // Set player as target
-        target = GameManager.instance.players[0].data.gameObject;
+        DoTargetPlayer();
         // Attack Target
         DoAttackTarget();
     }
@@ -98,13 +102,46 @@ public class AIController : Controller
 
     public bool CanSee( GameObject target )
     {
-        // TODO: Line of Sight and Field of View Checks 
-        return false;
+        // Field of View Checks 
+        // Get Vector to target
+        Vector3 vectorToTarget = target.transform.position - data.transform.position;
+        // Get angle between forward and vectorToTarget
+        float angle = Vector3.Angle(transform.forward, vectorToTarget);
+        // If the player is out of the AI field of view, then stops looking for target
+        if (angle > fieldOfView)
+        {
+            return false;
+        }
+
+        // Line of sight
+        // Raycast forward for the distance
+        RaycastHit hitInfo;
+        // if it hit something within viewDistance
+        if (Physics.Raycast(transform.position, transform.forward, out hitInfo, viewDistance))
+        {
+            // ... and that is not my target 
+            if (hitInfo.collider.gameObject != target)
+            {
+                // I can't see my target
+                return false;
+            }
+        }
+        // If I made it through all the checks, then I can see the target
+        return true;
     }
 
     public bool CanHear (GameObject target)
     {
-        // TODO: Distance check and soundmaker level check 
+        // Distance check 
+        if (Vector3.Distance(target.transform.position, transform.position) < hearingSensitivity)
+        {
+            // soundmaker level check 
+
+            // Then I can hear you
+            return true;
+        }
+
+        // If I got here, I can't hear you
         return false;
     }
 

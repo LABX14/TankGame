@@ -38,11 +38,12 @@ public class AI_SimpleController : AIController
 
             case AIStates.Spin:
                 // Do our "update" equivalent for this state
+                DoTargetPlayer();
                 Spin();
                 // Check for state changes
                 if (CanSee(target))
                 {
-                    currentState = AIStates.AttackPlayer;
+                    currentState = AIStates.AttackPlayer; // If the AI can see the target, then change the current state to attack
                 }
                 // TODO: Exit Time
                 break;
@@ -53,7 +54,7 @@ public class AI_SimpleController : AIController
                 // Check for state changes
                 if (!CanSee(target))
                 {
-                    currentState = AIStates.Spin;
+                    currentState = AIStates.Spin; // If the AI can not see the target, then change the current state to spin. 
                 }
                 break;
             default:

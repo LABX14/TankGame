@@ -692,6 +692,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2077511949}
   - component: {fileID: 2077511948}
+  - component: {fileID: 2077511950}
   m_Layer: 0
   m_Name: AIPlayer
   m_TagString: Untagged
@@ -706,11 +707,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2077511947}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3483da9e606de944fa269804d8278624, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  data: {fileID: 1658228972}
   data: {fileID: 1658228972}
   waypoints:
   - {fileID: 201544278}
@@ -722,6 +724,10 @@ MonoBehaviour:
   isPatrolling: 1
   isPatrolForward: 1
   currentState: 1
+  fieldOfView: 0
+  viewDistance: 0
+  hearingSensitivity: 0
+  target: {fileID: 0}
 --- !u!4 &2077511949
 Transform:
   m_ObjectHideFlags: 0
@@ -736,6 +742,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2077511950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2077511947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6242883d5d3e1354db19fae768654b2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 1658228972}
+  data: {fileID: 1658228972}
+  waypoints: []
+  currentWaypointIndex: 0
+  closeEnoughForWaypoints: 0.1
+  patrolType: 0
+  isPatrolling: 1
+  isPatrolForward: 1
+  currentState: 2
+  fieldOfView: 60
+  viewDistance: 10
+  hearingSensitivity: 1
+  target: {fileID: 666766393}
+  target: {fileID: 666766393}
 --- !u!1 &2115425198
 GameObject:
   m_ObjectHideFlags: 0
